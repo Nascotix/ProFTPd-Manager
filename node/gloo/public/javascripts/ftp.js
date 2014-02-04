@@ -1,0 +1,6 @@
+
+/*ProFTPD*/
+
+$(document).ready(function() {
+
+});
