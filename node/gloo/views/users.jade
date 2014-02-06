@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  br
+  h2 Liste des utilisateurs
+  br
+  .MainContainer
+    table.table.table-hover
+      thead
+        tr
+          th N°
+          th Utilisateur
+          th Mot de passe
+          th Groupe
+          th Répertoire personnel
+          th Gestion
+      tbody#listUser
+  br
+  .ManageContainer
+    button.btn.btn-default(type='button' onclick='getUserList()') Rafraichir
+    button.btn.btn-primary.spaceButtonAdd(type='button', data-toggle='modal', data-target='#ModalAddUser') Ajouter
