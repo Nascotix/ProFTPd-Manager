@@ -1,10 +1,19 @@
 extends layout
 
 block content
-  br
-  .btn-group
-      button.btn.btn-default(type='button') Refresh
-      button.btn.btn-default(type='button',data-toggle='modal', data-target='#ModalAddgroup') Add
-      button.btn.btn-default(type='button') Delete
-  br
-  h3 Liste des groupes
+  .globalContainer
+    br
+    h2.centerContent Liste des Groupes
+    br
+    .MainContainer
+      table.table.table-hover
+        thead
+          tr
+            th Nom du groupe
+            th Membres
+            th Gestion
+        tbody#listGroup
+    br
+    .ManageContainer.centerContent
+      button.btn.btn-default#grpList(type='button') Rafraichir
+      button.btn.btn-primary.spaceButtonAdd(type='button', data-toggle='modal', data-target='#ModalAddgroup') Ajouter

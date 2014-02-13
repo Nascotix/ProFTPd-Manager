@@ -1,7 +1,59 @@
-
-
+/*
+ ****** ProFTPd Manager *******
+*/
+.globalContainer{
+  width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
 .MainContainer{
-  width: 300px;
+  width: 900px;
   height: 400px;
   border: 1px solid grey;
+  overflow: auto;
+}
+.modalWidth{
+  width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.modalEdit{
+  width: 380px;
+  margin-right: auto;
+  margin-left: auto;
+}
+#ErrorAddGroup,
+#SuccessAddGroup,
+#ErrorAddUser,
+#SuccessAddUser,
+#ErrorEditUser,
+#SuccessEditUser,
+#ErrorEditGroup,
+#SuccessEditGroup{
+  display: none;
+}
+.errorBorder{
+  border: 1px solid red;
+}
+.spaceButtonAdd{
+  margin-left: 20px;
+}
+.delUsr{
+  margin-left: 5px;
+}
+.delGrp{
+  margin-left: 5px;
+}
+.centerContent,
+.alerteUser,
+.alerteGroup{
+  text-align: center;
+}
+.dispositionEdition{
+  display: inline-flex;
+}
+.dispLabel{
+  width: 310px;
+  text-align: right;
+  padding: 7px;
 }

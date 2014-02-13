@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+//var routes = require('./routes');
 var user = require('./routes/user');
 var group = require('./routes/group');
 var http = require('http');
@@ -30,10 +30,28 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-//app.get('/users', user.list);
+app.get('/', user.index);
+// app.get('/users', user.index);
+// app.get('/groups', group.index);
+
+//Recupérer les listes
+app.get('/users', user.index);
 app.get('/groups', group.index);
+
+//Ajout
+app.post('/groups', group.addgroup);
+app.post('/users', user.adduser);
+
+//Edit
+app.put('/groups/:id', group.editgroup);
+app.put('/users/:id', user.edituser);
+
+//Suppression
+app.delete('/groups/:id', group.deletegroup);
+app.delete('/users/:id', user.deleteuser);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
