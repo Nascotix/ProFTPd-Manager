@@ -179,7 +179,7 @@
         var cpt = 1;
         var group_list = '';
         for (var key in data) {
-          group_list += '<tr><td>' + data[key]['groupname'] + '</td><td>' + data[key]['members'] + '</td><td><button type="button" data-grpname="' + data[key]['groupname'] + '" data-gid="' + data[key]['gid'] + '" data-members="' + data[key]['members'] + '" title="Editer" class="btn btn-default btn-xs editGroup"><span class="glyphicon glyphicon-edit"></span></button><button data-id="' + data[key]['gid'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delGrp"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
+          group_list += '<tr><td>' + data[key]['groupname'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['members'] + '</td><td><button type="button" data-grpname="' + data[key]['groupname'] + '" data-gid="' + data[key]['gid'] + '" data-members="' + data[key]['members'] + '" title="Editer" class="btn btn-default btn-xs editGroup"><span class="glyphicon glyphicon-edit"></span></button><button data-id="' + data[key]['gid'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delGrp"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
           $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['gid']).attr('value', data[key]['gid']));
           $('#EditGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['gid']).attr('value', data[key]['gid']));
           cpt++;
