@@ -1,6 +1,6 @@
 {
   "name": "proftpd-manager",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gestion des utilisateurs et groupes du server ProFTPd",
   "keyword": [
     "ftp",
@@ -27,7 +27,9 @@
   "dependencies": {
     "express": "3.4.0",
     "jade": "*",
-    "extend": "~1.2.1"
+    "extend": "~1.2.1",
+    "validator": "~3.2.1",
+    "nconf": "~0.6.9"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -36,13 +38,11 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-nodemon": "~0.2.0",
     "grunt-concurrent": "~0.4.3",
-    "validator": "~3.2.1",
     "chai": "*",
     "supertest": "~0.9.0",
     "chai-http": "~0.4.0",
     "grunt-mocha": "~0.4.10",
-    "grunt-mocha-test": "~0.9.0",
-    "nconf": "~0.6.9"
+    "grunt-mocha-test": "~0.9.0"
   },
   "engines": {
     "node": "*"
