@@ -70,7 +70,6 @@ C'est une autre manière de configurer vos paramètres. Vous pouvez en effet sp�
 
 ```
 
-
 Voici la liste complète des commandes
 
 ```
