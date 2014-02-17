@@ -3,7 +3,7 @@
 
 'use strict';
 
-+function (global) {
+(function (global) {
 
   var $ = global.jQuery;
   var id_user;
@@ -241,9 +241,7 @@
         }
       });
     }
-
   }
-
 
   function editUser(user_id) {
     var cptError = 0;
@@ -512,4 +510,4 @@
       }
     });
   }
-}(window);
+})(window);

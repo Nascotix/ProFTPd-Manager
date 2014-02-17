@@ -5,6 +5,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     jshint: {
       options: {
+        'browser': true,
         'node': true,
         'esnext': false,
         'bitwise': true,
@@ -26,15 +27,21 @@ module.exports = function (grunt) {
         'white': true,
         'laxcomma': true,
         'asi': true,
-        'sub': true
+        'sub': true,
+        'globals': {
+          'it': false,
+          'describe': false,
+          '$': false,
+          'jQuery': false
+        }
       },
       src: [
         'Gruntfile.js',
-        '{model,routes,}/*.js'
+        '{model,routes,test}/*.js'
       ],
       assets: [
         'public/javascripts/**/*.js',
-        '!public/javascripts/vendor/**/*.js'
+        '!public/javascripts/vendor/**/*.js',
       ]
     },
     watch: {
@@ -49,11 +56,20 @@ module.exports = function (grunt) {
         options: {
           cwd: __dirname,
           ignore: ['node_modules/**'],
+          // argv: ['--host localhost', '--user user']
           ext: 'js',
-          watch: ['model', 'routes', 'views'],
+          watch: ['model', 'routes', 'views', 'test'],
           delayTime: 1,
           legacyWatch: true
         }
+      }
+    },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/*.js']
       }
     },
     concurrent: {
@@ -67,8 +83,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', 'server');
+  grunt.registerTask('test', ['jshint', 'mochaTest']);
   grunt.registerTask('server', 'concurrent:server');
-
 
   require('load-grunt-tasks')(grunt);
 };

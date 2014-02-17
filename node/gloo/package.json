@@ -2,12 +2,14 @@
   "name": "application-name",
   "version": "0.0.1",
   "private": true,
+  "bin": "bin/tonsupernomdebin",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "3.4.0",
-    "jade": "*"
+    "jade": "*",
+    "extend": "~1.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -17,6 +19,11 @@
     "grunt-nodemon": "~0.2.0",
     "grunt-concurrent": "~0.4.3",
     "validator": "~3.2.1",
-    "chai": "*"
+    "chai": "*",
+    "supertest": "~0.9.0",
+    "chai-http": "~0.4.0",
+    "grunt-mocha": "~0.4.10",
+    "grunt-mocha-test": "~0.9.0",
+    "nconf": "~0.6.9"
   }
 }
