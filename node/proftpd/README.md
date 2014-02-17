@@ -76,14 +76,14 @@ Voici la liste complète des commandes
 Usage: proftpd-manager
 
 Options:
-  --model-client                  Spécifie le client de la base de donnée (ex: mysql)      [string]
-  --model-connection-host         Adresse IP de la base de données                         [string]
-  --model-connection-user         Utilisateur de la base de données                        [string]
-  --model-connection-password     Mot de passe de utilisateur                              [string]
-  --model-connection-database     Table à laquelle on se connecte                          [string]
-  --model-connection-charset      charset utilisé par la base de données                   [string]
-  --json                          Prend un fichier JSON en argumment                       [file]
-  --port                          Port utilisé pour la web application                     [integer]
+  --model-client                  Spécifie le client de la base de donnée (ex: mysql)
+  --model-connection-host         Adresse IP de la base de données
+  --model-connection-user         Utilisateur de la base de données
+  --model-connection-password     Mot de passe de utilisateur
+  --model-connection-database     Table à laquelle on se connecte
+  --model-connection-charset      charset utilisé par la base de données
+  --json                          Prend un fichier JSON en argumment
+  --port                          Port utilisé pour la web application
 ```
 
 License
