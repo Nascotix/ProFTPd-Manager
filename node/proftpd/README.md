@@ -80,13 +80,13 @@ Options:
   --model-client                  Spécifie le client de la base de donnée (mysql)                [string]
   --model-connection-host         Adresse IP de la base de données                               [string]
   --model-connection-user         Utilisateur de la base de données                              [string]
-  --model-connection-password     Mot de passe de l'utilisateur                                  [boolean]
+  --model-connection-password     Mot de passe de l\'utilisateur                                 [boolean]
   --model-connection-database     Table à laquelle on se connecte                                [boolean]
   --model-connection-charset      charset utilisé par la base de données                         [boolean]
   --json                          Prend un fichier JSON en argumment                             [file]
-  --port                          Port d'écoute de l'application                                 [integer]
+  --port                          Port d'écoute de l\'application                                [integer]
 ```
 
 License
 -------
-ProFTPd Manager is released under the MIT license.
+ProFTPd Manager est sous license MIT.

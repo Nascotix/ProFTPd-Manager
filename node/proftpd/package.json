@@ -7,7 +7,12 @@
     "proftpd",
     "app"
   ],
-  "author": "Yann Saint-Marcoux",
+  "author": [
+    {
+      "name": "Yann Saint-Marcoux",
+      "email": "nascotix@gmail.com"
+    }
+  ],
   "contributors": [
     {
       "name": "Loïc Mahieu",
