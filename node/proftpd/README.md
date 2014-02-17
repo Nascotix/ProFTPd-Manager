@@ -8,11 +8,11 @@ Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez 
 Installation
 ------------
 
-L'installation de ProFTPd Manager n'est pas très compliquée. Commencez par télécharger le zip du projet.
+L'installation de ProFTPd Manager n'est pas très compliquée.
 
-### Variable d'environnement
-
-Pour plus de facilité, vous pouvez créer une varible d'environnement afin d'éviter de réécrire l'entièreté du chemin d'accès à l'application.
+```
+[sudo] npm install -g prodftp-manager
+```
 
 Usage
 -----
@@ -46,14 +46,15 @@ Par exemple :
     "connection": {
       "host": "localhost"
     }
-  }
+  },
+  "port": "8080"
 }
 ```
 
 Vous pouvez ensuite lancer le programme avec la commande suivante
 
 ```js
-./bin/proftpd --json config/config.json
+./bin/proftpd-manager --json votrefichierJSON
 ```
 
 ### En ligne de commande
@@ -62,17 +63,18 @@ C'est une autre manière de configurer vos paramètres. Vous pouvez en effet sp�
 
 ```js
 // Pour modifier l'hôte
-./bin/proftpd --model-connection-host 127.0.0.1
+./bin/proftpd-manager --model-connection-host 127.0.0.1
 
 //Pour modifier le mot de passe
-./bin/proftpd --model-connection-password votremotdepasse
+./bin/proftpd-manager --model-connection-password votremotdepasse
 
 ```
 
+
 Voici la liste complète des commandes
 
-<pre>
-Usage: proftpd
+```
+Usage: proftpd-manager
 
 Options:
   --model-client                  Spécifie le client de la base de donnée (mysql)                [string]
@@ -82,7 +84,8 @@ Options:
   --model-connection-database     Table à laquelle on se connecte                                [boolean]
   --model-connection-charset      charset utilisé par la base de données                         [boolean]
   --json                          Prend un fichier JSON en argumment                             [file]
-</pre>
+  --port                          Port d'écoute de l'application                                 [integer]
+```
 
 License
 -------
