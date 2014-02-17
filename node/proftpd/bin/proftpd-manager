@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+var proftpd = require('../app');
+var nconf = require('nconf');
+var path = require('path');
+
+var options = nconf
+  .argv();
+
+if (options.get('json')) {
+  options.file(path.resolve(options.get('json')));
+}
+
+var app = proftpd(options.get());
+
+app.listen(app.get('port'), function (err) {
+  if (err) {
+    throw err;
+  }
+
+  console.log('ProFTPd Manager start listening on ' + app.get('port'));
+});
