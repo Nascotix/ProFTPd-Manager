@@ -19,13 +19,13 @@ var createApp = function (config) {
         database : 'proftpd',
         charset  : 'utf8'
       },
-      debug: true
+      debug: false
     }
   };
 
   config = extend(true, {}, def, config);
 
-  console.log('Starting with options: ', config);
+  //console.log('Starting with options: ', config);
 
   var path = require('path');
   var model = require('./model/model')(config.model);
@@ -55,19 +55,15 @@ var createApp = function (config) {
 
   app.get('/', user.index);
 
-  //Recupérer les listes
   app.get('/users', user.index);
   app.get('/groups', group.index);
 
-  //Ajout
   app.post('/groups', group.addgroup);
   app.post('/users', user.adduser);
 
-  //Edit
   app.put('/groups/:id', group.editgroup);
   app.put('/users/:id', user.edituser);
 
-  //Suppression
   app.delete('/groups/:id', group.deletegroup);
   app.delete('/users/:id', user.deleteuser);
 

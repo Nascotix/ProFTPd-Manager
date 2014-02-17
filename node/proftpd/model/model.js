@@ -53,7 +53,6 @@ module.exports = function (config) {
     users
       .fetch()
       .done(function (models) {
-        //console.log('DONE!', arguments);
         callback(null, models.toJSON());
       });
   };
@@ -64,7 +63,6 @@ module.exports = function (config) {
     groups
       .fetch()
       .done(function (model) {
-        //console.log('DONE!', arguments);
         callback(null, model);
       });
   };
@@ -75,7 +73,6 @@ module.exports = function (config) {
     new Group(data)
       .save({}, {method: 'insert'})
       .done(function (model) {
-        console.log('Just Added a new group!', arguments);
         callback(null, model);
       });
   };
@@ -84,7 +81,6 @@ module.exports = function (config) {
     new User(data)
       .save({}, {method: 'insert'})
       .done(function (model) {
-        console.log('Just Added a new user!', arguments);
         callback(null, model);
       });
   };
@@ -105,7 +101,6 @@ module.exports = function (config) {
         model
           .destroy()
           .done(function () {
-            console.log('Group' + id + 'erased!', arguments);
             callback(null, true);
           });
       }
@@ -125,7 +120,6 @@ module.exports = function (config) {
         model
           .destroy()
           .done(function () {
-            console.log('User' + id + 'erased!', arguments);
             callback(null, true);
           });
       }
@@ -146,7 +140,6 @@ module.exports = function (config) {
         model
           .save(params, {method: 'update'})
           .done(function (model) {
-            console.log('Just modified the user!', arguments);
             callback(null, model);
           });
       }
@@ -165,7 +158,6 @@ module.exports = function (config) {
         model
           .save(params, {method: 'update'})
           .done(function (model) {
-            console.log('Just modified the group!', arguments);
             callback(null, model);
           });
       }
@@ -181,7 +173,6 @@ module.exports = function (config) {
       .query({where: {gid: id}})
       .fetchOne()
       .done(function (model) {
-        console.log('GROUP FOUND!', arguments);
         callback(null, model);
       });
   };
@@ -193,7 +184,6 @@ module.exports = function (config) {
       .query({where: {id: id}})
       .fetchOne()
       .done(function (model) {
-        console.log('USER FOUND!', arguments);
         callback(null, model);
       });
   };
@@ -206,10 +196,8 @@ module.exports = function (config) {
       .fetchOne()
       .done(function (model) {
         if (model !== null) {
-          //console.log('MODEL : ERR_DUP_ENTRY!', arguments);
           callback(null, false);
         } else {
-          //console.log('MODEL : Ok pour le GID', model);
           callback(null, true);
         }
       });

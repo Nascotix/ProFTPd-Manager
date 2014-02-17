@@ -57,7 +57,6 @@ module.exports = function (model) {
   };
 
   controller.index = function (req, res, next) {
-    //res.render('groups');
     res.format({
       'text/html': function () {
         res.render('groups');
@@ -69,7 +68,6 @@ module.exports = function (model) {
   };
 
   controller.addgroup = function (req, res, next) {
-    //console.log('GRPNAME: ' + req.body.nameGrp);
     var obj = {};
     obj.grpname = validator.trim(req.body.nameGrp);
     obj.grpmember = validator.trim(req.body.membGrp);
@@ -82,13 +80,11 @@ module.exports = function (model) {
     } else {
       model.countGroupById(req.body.idGroup, function (err, count) {
         if (count !== false) {
-          //console.log('CONTROLLER: ok pour le GID');
           model.addGroup({
             groupname: req.body.nameGrp,
             gid: req.body.idGroup,
             members: req.body.membGrp
           }, function (err, group) {
-            //console.log('ERROR BDD: ' + err);
             if (err) {
               next(err);
               return;
@@ -96,7 +92,6 @@ module.exports = function (model) {
             res.send(group);
           });
         } else {
-          //console.log('CONTROLLER: ERROR');
           var er = {};
           er.dup = 'Ce Gid existe déjà !';
           res.send(er);
@@ -106,7 +101,6 @@ module.exports = function (model) {
   };
 
   controller.deletegroup = function (req, res, next) {
-    //console.log('ID du groupe à supprimer: ' + req.params.id);
     model.delGroup(req.params.id, function (err, grp) {
       if (err) {
         next(err);

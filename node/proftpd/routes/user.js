@@ -1,4 +1,3 @@
-
 /*
  * GET home page.
  */
@@ -88,7 +87,6 @@ module.exports = function (model) {
   };
 
   controller.adduser = function (req, res, next) {
-    //console.log('\nNew user: ' + req.body.name);
     var usrpwd = crypto.createHash('md5').update(req.body.pwd).digest('hex');
     var date = new Date();
     var obj = {};
@@ -125,7 +123,6 @@ module.exports = function (model) {
   };
 
   controller.deleteuser = function (req, res, next) {
-    //console.log('ID du user à supprimer: ' + req.params.id);
     model.delUser(req.params.id, function (err, usr) {
       if (err) {
         next(err);
@@ -136,7 +133,6 @@ module.exports = function (model) {
   };
 
   controller.edituser = function (req, res, next) {
-    //console.log('USER to edit: ' + req.params.id);
     var editDate = new Date();
     var obj = {};
     obj.usrname = validator.trim(req.body.name);
@@ -174,8 +170,6 @@ module.exports = function (model) {
         });
       }
     } else {
-      // var schema = controller.validate_user();
-      // var validation = revalidator.validate(obj, schema);
       if (!validation.valid) {
         res.send(validation);
         return;
@@ -202,4 +196,4 @@ module.exports = function (model) {
   };
 
   return controller;
-}
+};

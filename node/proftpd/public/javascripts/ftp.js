@@ -29,11 +29,7 @@
       $('#ErrorEditGroup').hide('fast');
       $('.errorContent').html('');
     });
-    /*$('#GroupMember').click(function(){
-      $('#GroupMember').removeClass('errorBorder');
-      $('#ErrorAddGroup').hide('fast');
-      $('.errorContent').html('');
-    });*/
+
     //USER
     [
       '#UserName',
@@ -329,12 +325,6 @@
       $('.errorContent').append('Entrez le nom du groupe !');
       cptError++;
     }
-    /*if(grpMember == ''){
-      $('#GroupMember').addClass('errorBorder');
-      $('#ErrorAddGroup').show('fast');
-      $('.errorContent').append('Entrez le nom du groupe!');
-      cptError++;
-    }*/
 
     if (cptError === 0) {
       var datastr = {};
@@ -349,7 +339,6 @@
         timeout: 5000,
         dataType: 'json',
         success: function (data) {
-          //console.log('result: ', data);
           var ErrorContent = '';
           if (data.errors) {
             for (var i in data.errors) {
@@ -389,12 +378,6 @@
     var usrGrp = $('#UserGrp').val();
     var usrHomeDir = $('#HomeDir').val();
     var usrShell = $('#Shell').val();
-
-    // console.log('name: ' + usrName);
-    // console.log('pwd: ' + usrPwd);
-    // console.log('toGroup: ' + usrGrp);
-    // console.log('homeDir: ' + usrHomeDir);
-    // console.log('shell: ' + usrShell);
 
     if (usrName === '') {
       $('#UserName').addClass('errorBorder');
@@ -443,7 +426,6 @@
         timeout: 5000,
         dataType: 'json',
         success: function (data) {
-          //console.log('result: ', data.errors);
           var ErrorContent = '';
           if (data.errors) {
             for (var i in data.errors) {
@@ -478,8 +460,6 @@
   /**********   Suppression   ************/
 
   function delGroup(CurrentGroup) {
-    //var groupId = CurrentGroup.attr('data-id');
-
     $.ajax({
       type: 'DELETE',
       url: '/groups/' + CurrentGroup,
