@@ -3,14 +3,14 @@ ProFTPd Manager
 
 ProFTPd Manager est un outil de gestion des utilisateurs et des groupes d'un ProFTPd. Vous avez la possibilité de spécifier la configuration de votre base de donnée soit en ligne de commande soit via un fichier de configuration JSON.
 
-Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez leur [site web](http://www.proftpd.org/)
+Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez leur [site web](http://www.proftpd.org/).
 
 Installation
 ------------
 
-L'installation de ProFTPd Manager n'est pas très compliquée. Commencez par télécharger le zip du projet
+L'installation de ProFTPd Manager n'est pas très compliquée. Commencez par télécharger le zip du projet.
 
-### Varible d'environnement
+### Variable d'environnement
 
 Pour plus de facilité, vous pouvez créer une varible d'environnement afin d'éviter de réécrire l'entièreté du chemin d'accès à l'application.
 
