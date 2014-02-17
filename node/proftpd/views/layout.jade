@@ -1,0 +1,156 @@
+doctype html
+html
+  head
+    title= 'ProFTPd Manager'
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/todc-bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/ftp.css')
+
+    script(src='http://code.jquery.com/jquery-1.10.2.min.js')
+    script(src='javascripts/vendor/bootstrap.js')
+    script(src='javascripts/ftp.js')
+  body
+    block header
+      #wrap
+        // Fixed navbar
+        .navbar.navbar-default.navbar-fixed-top(role='navigation')
+          .container
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand(href='/users') ProFTPd Manager
+            .collapse.navbar-collapse
+              ul.nav.navbar-nav
+                li
+                  a(href='/users') Utilisateurs
+                li
+                  a(href='/groups') Groupes
+
+    block content
+
+    #ModalAddgroup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+             .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#LabelAddGroup.modal-title.centerContent Ajouter un groupe
+             .modal-body
+                input.modalWidth.form-control#GroupName(type='text' placeholder='Nom du groupe')
+                br
+                input.modalWidth.form-control#GroupId(type='text' placeholder='Gid')
+                br
+                .modalWidth.alert.alert-info
+                  | Le Gid doit être unique !
+                input.modalWidth.form-control#GroupMember(type='text' placeholder='Membre du groupe')
+                br
+                .alert.alert-warning.alerteGroup#ErrorAddGroup
+                  .errorContent
+                .alert.alert-success.alerteGroup#SuccessAddGroup
+                  .succesContent
+             .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Retour
+                button.btn.btn-primary#group(type='button') Ajouter
+
+    #ModalEditGroup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+             .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#LabelEditGroup.modal-title.centerContent Editer un groupe
+             .modal-body
+                .modalEdit
+                  div.dispositionEdition
+                    label.dispLabel Nom :
+                    input.form-control#EditGroupName(type='text' placeholder='Nom du groupe')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Gid :
+                    input.form-control#EditGroupId(type='text' placeholder='Gid')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Membres :
+                    input.form-control#EditGroupMember(type='text' placeholder='Membre du groupe')
+                  br
+                  .alert.alert-warning.alerteGroup#ErrorEditGroup
+                    .errorContent
+                  .alert.alert-success.alerteGroup#SuccessEditGroup
+                    .succesContent
+             .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Retour
+                button.btn.btn-primary#SubmitEditGroup(type='button') Appliquer
+
+    #ModalAddUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+             .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#LabelAddUser.modal-title.centerContent Ajouter un utilisateur
+             .modal-body
+                input.modalWidth.form-control#UserName(type='text' placeholder='Nom de l\'utilisateur')
+                br
+                input.modalWidth.form-control#PwdUser(type='password' placeholder='Mot de passe')
+                br
+                div.modalWidth
+                  label Uid :
+                  input.modalWidth.form-control#UserId(type='text' placeholder='Uid' value='0')
+                br
+                div.modalWidth
+                  label Gid :
+                  select.form-control#UserGrp
+                br
+                input.modalWidth.form-control#HomeDir(type='text' placeholder='Répertoire personnel')
+                br
+                input.modalWidth.form-control#Shell(type='text' placeholder='Shell de l\'utilisateur')
+                br
+                .alert.alert-warning.alerteUser#ErrorAddUser
+                  .errorContent
+                .alert.alert-success.alerteUser#SuccessAddUser
+                  .succesContent
+             .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Retour
+                button.btn.btn-primary#user(type='button') Ajouter
+
+    #ModalEditUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+             .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                h4#LabelEditUser.modal-title.centerContent Editer un utilisateur
+             .modal-body
+                .modalEdit
+                  div.dispositionEdition
+                    label.dispLabel Nom :
+                    input.form-control#EditName(type='text' placeholder='Nom de l\'utilisateur')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Mot de passe :
+                    input.form-control#EditPwd(type='password' placeholder='Mot de passe')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Uid :
+                    input.form-control#EditId(type='text' placeholder='Uid' value='0')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Gid :
+                    select.form-control#EditGrp
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Répertoire personnel :
+                    input.form-control#EditHomeDir(type='text' placeholder='Répertoire personnel')
+                  br
+                  div.dispositionEdition
+                    label.dispLabel Shell :
+                    input.form-control#EditShell(type='text' placeholder='Shell de l\'utilisateur')
+                  br
+                  .alert.alert-warning.alerteUser#ErrorEditUser
+                    .errorContent
+                  .alert.alert-success.alerteUser#SuccessEditUser
+                    .succesContent
+             .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Retour
+                button.btn.btn-primary#SubmitEditUser(type='button') Appliquer
