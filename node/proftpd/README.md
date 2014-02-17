@@ -8,7 +8,7 @@ Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez 
 Installation
 ------------
 
-L'installation de ProFTPd Manager n'est pas très compliquée.
+L'installation de ProFTPd Manager n'est pas très compliquée. On installe l'application par l'intermédiaire du gestionnaire de paquets NPM.
 
 ```
 [sudo] npm install -g prodftp-manager
@@ -17,7 +17,7 @@ L'installation de ProFTPd Manager n'est pas très compliquée.
 Usage
 -----
 
-Comme explicité précédemment, il vous est possible de réécrire par dessus la configuration de base. Soit par fichier de configuration JSON soit en ligne de commande
+Comme explicité précédemment, il vous est possible de réécrire par dessus la configuration de base. Soit par un fichier de configuration JSON soit en ligne de commande
 
 ### Configuration de base
 
@@ -77,16 +77,17 @@ Voici la liste complète des commandes
 Usage: proftpd-manager
 
 Options:
-  --model-client                  Spécifie le client de la base de donnée (mysql)                [string]
+  --model-client                  Spécifie le client de la base de donnée (ex: mysql)            [string]
   --model-connection-host         Adresse IP de la base de données                               [string]
   --model-connection-user         Utilisateur de la base de données                              [string]
-  --model-connection-password     Mot de passe de l\'utilisateur                                 [boolean]
+  --model-connection-password     Mot de passe de utilisateur                                    [boolean]
   --model-connection-database     Table à laquelle on se connecte                                [boolean]
   --model-connection-charset      charset utilisé par la base de données                         [boolean]
   --json                          Prend un fichier JSON en argumment                             [file]
-  --port                          Port d'écoute de l\'application                                [integer]
+  --port                          Port utilisé pour la web application                           [integer]
 ```
 
 License
 -------
+
 ProFTPd Manager est sous license MIT.
