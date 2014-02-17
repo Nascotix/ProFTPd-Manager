@@ -1,5 +1,5 @@
 {
-  "name": "proftpd manager",
+  "name": "proftpd-manager",
   "version": "0.0.1",
   "description": "Gestion des utilisateurs et groupes du server ProFTPd",
   "keyword": [
@@ -19,7 +19,7 @@
       "email": "loic@igloo.be"
     }
   ],
-  "private": true,
+  "private": false,
   "bin": "bin/proftpd-manager",
   "scripts": {
     "start": "node app.js"
