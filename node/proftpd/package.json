@@ -1,5 +1,5 @@
 {
-  "name": "ProFTPd Manager",
+  "name": "proftpd manager",
   "version": "0.0.1",
   "description": "Gestion des utilisateurs et groupes du server ProFTPd",
   "keyword": [
