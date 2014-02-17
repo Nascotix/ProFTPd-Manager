@@ -54,7 +54,7 @@ Par exemple :
 Vous pouvez ensuite lancer le programme avec la commande suivante
 
 ```js
-./bin/proftpd-manager --json votrefichierJSON
+proftpd-manager --json votrefichierJSON
 ```
 
 ### En ligne de commande
@@ -63,10 +63,10 @@ C'est une autre manière de configurer vos paramètres. Vous pouvez en effet sp�
 
 ```js
 // Pour modifier l'hôte
-./bin/proftpd-manager --model-connection-host 127.0.0.1
+proftpd-manager --model-connection-host 127.0.0.1
 
 //Pour modifier le mot de passe
-./bin/proftpd-manager --model-connection-password votremotdepasse
+proftpd-manager --model-connection-password votremotdepasse
 
 ```
 

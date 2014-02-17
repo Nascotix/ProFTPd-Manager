@@ -1,6 +1,6 @@
 {
   "name": "proftpd-manager",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "Gestion des utilisateurs et groupes du server ProFTPd",
   "keyword": [
     "ftp",
@@ -29,7 +29,10 @@
     "jade": "*",
     "extend": "~1.2.1",
     "validator": "~3.2.1",
-    "nconf": "~0.6.9"
+    "nconf": "~0.6.9",
+    "bookshelf": "0.6.2",
+    "mysql": "2.0.1",
+    "revalidator": "0.1.6"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
