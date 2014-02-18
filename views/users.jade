@@ -3,7 +3,12 @@ extends layout
 block content
   .globalContainer
     br
-    h2.centerContent Liste des utilisateurs
+    h2 Liste des utilisateurs
+    br
+    .ManageContainer
+      button.btn.btn-default.glyphicon.glyphicon-refresh#userList(type='button')
+      button.btn.btn-primary.spaceButtonAdd.glyphicon.glyphicon-plus(type='button', data-toggle='modal', data-target='#ModalAddUser')
+    br
     br
     .MainContainer
       table.table.table-hover
@@ -18,7 +23,4 @@ block content
             th Shell
             th Gestion
         tbody#listUser
-    br
-    .ManageContainer.centerContent
-      button.btn.btn-default#userList(type='button') Rafraichir
-      button.btn.btn-primary.spaceButtonAdd(type='button', data-toggle='modal', data-target='#ModalAddUser') Ajouter
+

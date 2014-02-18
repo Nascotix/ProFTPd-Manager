@@ -1,3 +1,7 @@
+/*
+ ****** ProFTPd Manager *******
+*/
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +9,55 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+.globalContainer{
+  width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.modalWidth{
+  width: 300px !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+.modalEdit{
+  width: 380px;
+  margin-right: auto;
+  margin-left: auto;
+}
+#ErrorAddGroup,
+#SuccessAddGroup,
+#ErrorAddUser,
+#SuccessAddUser,
+#ErrorEditUser,
+#SuccessEditUser,
+#ErrorEditGroup,
+#SuccessEditGroup{
+  display: none;
+}
+.errorBorder{
+  border: 1px solid red;
+}
+.spaceButtonAdd{
+  margin-left: 15px;
+}
+.delUsr{
+  margin-left: 5px;
+}
+.delGrp{
+  margin-left: 5px;
+}
+.centerContent,
+.alerteUser,
+.alerteGroup{
+  text-align: center;
+}
+.dispositionEdition{
+  display: inline-flex;
+}
+.dispLabel{
+  width: 310px;
+  text-align: right;
+  padding: 7px;
 }

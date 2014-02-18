@@ -8,7 +8,7 @@ Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez 
 Installation
 ------------
 
-L'installation de ProFTPd Manager n'est pas très compliquée. On installe l'application par l'intermédiaire du gestionnaire de paquets NPM.
+L'installation de ProFTPd Manager n'est pas très compliquée. Elle se fait par l'intermédiaire du gestionnaire de paquets NPM.
 
 ```
 [sudo] npm install -g prodftp-manager
@@ -76,12 +76,12 @@ Voici la liste complète des commandes
 Usage: proftpd-manager
 
 Options:
-  --model-client                  Spécifie le client de la base de donnée (ex: mysql)
+  --model-client                  Client de la base de donnée (ex: mysql)
   --model-connection-host         Adresse IP de la base de données
   --model-connection-user         Utilisateur de la base de données
-  --model-connection-password     Mot de passe de utilisateur
+  --model-connection-password     Mot de passe utilisateur
   --model-connection-database     Table à laquelle on se connecte
-  --model-connection-charset      charset utilisé par la base de données
+  --model-connection-charset      Charset utilisé par la base de données
   --json                          Prend un fichier JSON en argumment
   --port                          Port utilisé pour la web application
 ```
