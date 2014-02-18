@@ -1,7 +1,7 @@
 {
   "name": "proftpd-manager",
-  "version": "0.1.1",
-  "description": "Gestion des utilisateurs et groupes du server ProFTPd",
+  "version": "0.1.2",
+  "description": "Gestion des utilisateurs et groupes de votre serveur ProFTPd via interface web",
   "keyword": [
     "ftp",
     "proftpd",

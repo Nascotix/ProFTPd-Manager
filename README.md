@@ -1,12 +1,11 @@
-ProFTPd Manager
-===============
+# ProFTPd Manager
 
-ProFTPd Manager est un outil de gestion des utilisateurs et des groupes d'un ProFTPd. Vous avez la possibilité de spécifier la configuration de votre base de donnée soit en ligne de commande soit via un fichier de configuration JSON.
+ProFTPd Manager est un outil de gestion des utilisateurs et des groupes de votre serveur ProFTPd via une toute nouvelle interface web au design épuré. ProFTPd manager se veut simple d'utilisation.
+Vous avez la possibilité de spécifier la configuration de votre base de donnée soit en ligne de commande soit via un fichier de configuration JSON.
 
 Si vous voulez avoir des renseignements supplémentaires sur proFTPd, consultez leur [site web](http://www.proftpd.org/).
 
-Installation
-------------
+## Installation
 
 L'installation de ProFTPd Manager n'est pas très compliquée. Elle se fait par l'intermédiaire du gestionnaire de paquets NPM.
 
@@ -14,8 +13,7 @@ L'installation de ProFTPd Manager n'est pas très compliquée. Elle se fait par 
 [sudo] npm install -g prodftp-manager
 ```
 
-Usage
------
+## Usage
 
 Comme explicité précédemment, il vous est possible de réécrire par dessus la configuration de base. Soit par un fichier de configuration JSON soit en ligne de commande
 
@@ -70,7 +68,7 @@ proftpd-manager --model-connection-password votremotdepasse
 
 ```
 
-Voici la liste complète des commandes
+### Liste complète des commandes
 
 ```
 Usage: proftpd-manager
@@ -86,7 +84,6 @@ Options:
   --port                          Port utilisé pour la web application
 ```
 
-License
--------
+## License
 
 ProFTPd Manager est sous license MIT.
