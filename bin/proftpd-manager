@@ -18,5 +18,5 @@ app.listen(app.get('port'), function (err) {
     throw err;
   }
 
-  console.log('ProFTPd Manager start listening on ' + app.get('port'));
+  console.log('ProFTPd Manager start listening on port ' + app.get('port'));
 });
