@@ -11,8 +11,6 @@
 
   $(document).ready(function () {
 
-    initBinding();
-
     //Chargement des listes des utilisateurs et des groupes
     getUserList();
     getGroupList();
@@ -102,15 +100,7 @@
   //Fonctions
 
   //Permet de binder les éléments au DOM après mes requêtes ajax
-  function initBinding() {
-
-    $('.delGrp').on('click', function () {
-      var id = $(this).attr('data-id');
-      var answer = confirm("Etes-vous sûr de supprimer ce groupe?");
-      if (answer){
-        delGroup(id);
-      }
-    });
+  function initUserBinding() {
 
     $('.delUsr').on('click', function () {
       var id = $(this).attr('data-usr');
@@ -131,6 +121,17 @@
       $('#ModalEditUser').modal('show');
     });
 
+  }
+  function initGroupBinding() {
+
+    $('.delGrp').on('click', function () {
+      var id = $(this).attr('data-id');
+      var answer = confirm("Etes-vous sûr de supprimer ce groupe?");
+      if (answer){
+        delGroup(id);
+      }
+    });
+
     $('.editGroup').on('click', function () {
       id_group = $(this).attr('data-gid');
       $('#EditGroupName').val($(this).attr('data-grpname'));
@@ -147,7 +148,7 @@
     $('#listUser').html('');
     var num = 1;
 
-    $.ajax({
+    var xhr = $.ajax({
       url: '/users',
       timeout: 5000,
       dataType: 'json',
@@ -160,19 +161,21 @@
             $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Non</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
           num++;
         }
-        initBinding();
+        initUserBinding();
       },
       error: function () {
         console.log('La requête pour récuprer les utilisateurs a expiré!');
       }
     });
+
+    return xhr.promise();
   }
 
   function getGroupList() {
     $('#listGroup').html('');
     $('#UserGrp').html('');
 
-    $.ajax({
+    var xhr = $.ajax({
       url: '/groups',
       timeout: 5000,
       dataType: 'json',
@@ -186,13 +189,15 @@
           $('#EditGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
           cpt++;
         }
+        initGroupBinding();
         $('#listGroup').append(group_list);
-        initBinding();
       },
       error: function () {
         console.log('La requête pour récuprer les groupes a expiré!');
       }
     });
+
+    return xhr.promise();
   }
 
   /**********   Modification   ************/
