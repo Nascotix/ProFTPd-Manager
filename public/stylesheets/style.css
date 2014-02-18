@@ -2,6 +2,10 @@
  ****** ProFTPd Manager *******
 */
 
+.errorBorder{
+  border: 1px solid red !important;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -26,6 +30,7 @@ a {
   margin-right: auto;
   margin-left: auto;
 }
+
 #ErrorAddGroup,
 #SuccessAddGroup,
 #ErrorAddUser,
@@ -36,11 +41,14 @@ a {
 #SuccessEditGroup{
   display: none;
 }
-.errorBorder{
-  border: 1px solid red;
+
+.spaceButtonAddUser{
+  float: right;
+  margin-right: 37px;
 }
-.spaceButtonAdd{
-  margin-left: 15px;
+.spaceButtonAddGroup{
+  float: right;
+  margin-right: 158px;
 }
 .delUsr{
   margin-left: 5px;
@@ -53,11 +61,22 @@ a {
 .alerteGroup{
   text-align: center;
 }
-.dispositionEdition{
+.disposition{
   display: inline-flex;
 }
 .dispLabel{
   width: 310px;
   text-align: right;
   padding: 7px;
+}
+.mainTilte{
+  width: 325px;
+}
+#grpList,
+#userList{
+  margin-left: 10px
+}
+.infoGid:hover{
+  color: blue;
+  cursor: pointer;
 }

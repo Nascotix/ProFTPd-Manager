@@ -3,11 +3,11 @@ extends layout
 block content
   .globalContainer
     br
-    h2 Liste des utilisateurs
-    br
+    .mainTilte
+      h2 Liste des utilisateurs
+        button.btn.btn-default.glyphicon.glyphicon-refresh.btn-xs#userList(type='button' title='Rafraichir')
     .ManageContainer
-      button.btn.btn-default.glyphicon.glyphicon-refresh#userList(type='button')
-      button.btn.btn-primary.spaceButtonAdd.glyphicon.glyphicon-plus(type='button', data-toggle='modal', data-target='#ModalAddUser')
+      button.btn.btn-primary.spaceButtonAddUser.glyphicon.glyphicon-plus(type='button', data-toggle='modal', data-target='#ModalAddUser' title='Ajouter')
     br
     br
     .MainContainer

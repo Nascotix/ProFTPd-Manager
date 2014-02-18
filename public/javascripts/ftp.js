@@ -49,6 +49,8 @@
     $('#ModalAddgroup').focusout(function () {
       $('#ErrorAddGroup').hide('fast');
       $('.errorContent').html('');
+      $('#GroupName').removeClass('errorBorder');
+      $('#GroupId').removeClass('errorBorder');
     });
     $('#ModalEditGroup').focusout(function () {
       $('#ErrorEditGroup').hide('fast');
@@ -57,6 +59,11 @@
     $('#ModalAddUser').focusout(function () {
       $('#ErrorAddUser').hide('fast');
       $('.errorContent').html('');
+      $('#UserName').removeClass('errorBorder');
+      $('#PwdUser').removeClass('errorBorder');
+      $('#UserId').removeClass('errorBorder');
+      $('#HomeDir').removeClass('errorBorder');
+      $('#Shell').removeClass('errorBorder');
     });
     $('#ModalEditUser').focusout(function () {
       $('#ErrorEditUser').hide('fast');
@@ -99,14 +106,18 @@
 
     $('.delGrp').on('click', function () {
       var id = $(this).attr('data-id');
-      //console.log('group to del: ' + id);
-      delGroup(id);
+      var answer = confirm("Etes-vous sûr de supprimer ce groupe?");
+      if (answer){
+        delGroup(id);
+      }
     });
 
     $('.delUsr').on('click', function () {
       var id = $(this).attr('data-usr');
-      //console.log('user to del: ' + id);
-      delUser(id);
+      var answer = confirm("Etes-vous sûr de supprimer cet utilisateur?");
+      if (answer){
+        delUser(id);
+      }
     });
 
     $('.editUser').on('click', function () {
@@ -171,8 +182,8 @@
         var group_list = '';
         for (var key in data) {
           group_list += '<tr><td>' + data[key]['groupname'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['members'] + '</td><td><button type="button" data-grpname="' + data[key]['groupname'] + '" data-gid="' + data[key]['gid'] + '" data-members="' + data[key]['members'] + '" title="Editer" class="btn btn-default btn-xs editGroup"><span class="glyphicon glyphicon-edit"></span></button><button data-id="' + data[key]['gid'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delGrp"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
-          $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['gid']).attr('value', data[key]['gid']));
-          $('#EditGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['gid']).attr('value', data[key]['gid']));
+          $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
+          $('#EditGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
           cpt++;
         }
         $('#listGroup').append(group_list);
@@ -317,7 +328,13 @@
     if (grpName === '') {
       $('#GroupName').addClass('errorBorder');
       $('#ErrorAddGroup').show('fast');
-      $('.errorContent').append('Entrez le nom du groupe !');
+      $('.errorContent').append('Entrez le nom du groupe !<br/>');
+      cptError++;
+    }
+    if (grpId === '') {
+      $('#GroupId').addClass('errorBorder');
+      $('#ErrorAddGroup').show('fast');
+      $('.errorContent').append('Entrez un Gid !<br/>');
       cptError++;
     }
 

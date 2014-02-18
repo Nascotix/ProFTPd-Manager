@@ -3,11 +3,11 @@ extends layout
 block content
   .globalContainer
     br
-    h2 Liste des groupes
-    br
+    .mainTilte
+      h2 Liste des groupes
+        button.btn.btn-default.glyphicon.glyphicon-refresh.btn-xs#grpList(type='button' title='Rafraichir')
     .ManageContainer
-      button.btn.btn-default.glyphicon.glyphicon-refresh#grpList(type='button')
-      button.btn.btn-primary.spaceButtonAdd.glyphicon.glyphicon-plus(type='button', data-toggle='modal', data-target='#ModalAddgroup')
+      button.btn.btn-primary.spaceButtonAddGroup.glyphicon.glyphicon-plus(type='button', data-toggle='modal', data-target='#ModalAddgroup' title='Ajouter')
     br
     br
     .MainContainer
