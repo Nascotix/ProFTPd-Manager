@@ -63,9 +63,6 @@
       $('.errorContent').html('');
     });
 
-    //Default value of GID by adding a new group
-    $('#GroupId').val('5500');
-
     //Récupération des listes
     $('#userList').click(function () {
       getUserList();
@@ -93,8 +90,6 @@
     $('#SubmitEditUser').click(function () {
       editUser(id_user);
     });
-
-
   });
 
   //Fonctions
@@ -355,7 +350,7 @@
             $('#SuccessAddGroup').show();
             //Reset des champs
             $('#GroupName').val('');
-            $('#GroupId').val('5500');
+            $('#GroupId').val('');
             $('#GroupMember').val('');
             $('#ModalAddgroup').modal('hide');
             $('#SuccessAddGroup').hide();
