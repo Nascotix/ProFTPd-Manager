@@ -1,12 +1,18 @@
 {
   "name": "proftpd-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gestion des utilisateurs et groupes du server ProFTPd",
   "keyword": [
     "ftp",
     "proftpd",
-    "app"
+    "app",
+    "ftp",
+    "pro"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nascotix/proftpd-manager.git"
+  },
   "author": [
     {
       "name": "Yann Saint-Marcoux",
