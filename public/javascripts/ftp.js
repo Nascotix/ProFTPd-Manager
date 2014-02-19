@@ -19,12 +19,12 @@
     //GROUP
     $('#GroupName').focus(function () {
       $('#GroupName').removeClass('errorBorder');
-      $('#ErrorAddGroup').hide('fast');
+      $('#ErrorGroup').hide('fast');
       $('.errorContent').html('');
     });
-    $('#EditGroupName').focus(function () {
-      $('#EditGroupName').removeClass('errorBorder');
-      $('#ErrorEditGroup').hide('fast');
+    $('#GroupId').focus(function () {
+      $('#GroupId').removeClass('errorBorder');
+      $('#ErrorGroup').hide('fast');
       $('.errorContent').html('');
     });
 
@@ -44,18 +44,15 @@
       });
     });
 
-    $('#ModalAddgroup').focusout(function () {
-      $('#ErrorAddGroup').hide('fast');
+    $('#ModalGroup').focusout(function () {
+      $('#ErrorGroup').hide('fast');
       $('.errorContent').html('');
       $('#GroupName').removeClass('errorBorder');
       $('#GroupId').removeClass('errorBorder');
     });
-    $('#ModalEditGroup').focusout(function () {
-      $('#ErrorEditGroup').hide('fast');
-      $('.errorContent').html('');
-    });
-    $('#ModalAddUser').focusout(function () {
-      $('#ErrorAddUser').hide('fast');
+
+    $('#ModalUser').focusout(function () {
+      $('#ErrorUser').hide('fast');
       $('.errorContent').html('');
       $('#UserName').removeClass('errorBorder');
       $('#PwdUser').removeClass('errorBorder');
@@ -63,9 +60,15 @@
       $('#HomeDir').removeClass('errorBorder');
       $('#Shell').removeClass('errorBorder');
     });
-    $('#ModalEditUser').focusout(function () {
-      $('#ErrorEditUser').hide('fast');
-      $('.errorContent').html('');
+
+    //Switch modal
+    $('#ModalGroup').on('hidden.bs.modal', function (e) {
+      //groupSwitch();
+      resetGroupModal();
+    });
+    $('#ModalUser').on('hidden.bs.modal', function (e) {
+      //userSwitch();
+      resetUserModal();
     });
 
     //Récupération des listes
@@ -78,68 +81,99 @@
 
     // Ajout
     $('#group').click(function () {
-      $('#ErrorAddGroup').hide('fast');
-      $('.errorContent').html('');
-      addGroup();
+      var mode = $('#group').attr('data-addmode');
+
+      if (mode === 'true') {
+        $('#ErrorGroup').hide('fast');
+        $('.errorContent').html('');
+        addGroup();
+      } else {
+        $('#ErrorGroup').hide('fast');
+        $('.errorContent').html('');
+        editGroup(id_group);
+      }
     });
     $('#user').click(function () {
-      $('#ErrorAddUser').hide('fast');
-      $('.errorContent').html('');
-      addUser();
-    });
+      var mode = $('#user').attr('data-addmode');
 
-    //Modification
-    $('#SubmitEditGroup').click(function () {
-      editGroup(id_group);
-    });
-    $('#SubmitEditUser').click(function () {
-      editUser(id_user);
+      if (mode === 'true') {
+        $('#ErrorUser').hide('fast');
+        $('.errorContent').html('');
+        addUser();
+      } else {
+        $('#ErrorUser').hide('fast');
+        $('.errorContent').html('');
+        editUser(id_user);
+      }
     });
   });
 
-  //Fonctions
+  /************   Fonctions   ***********/
+  //Reset du modal
+  function resetGroupModal() {
+    $('#LabelGroup').html('Ajouter un groupe');
+    $('#group').html('Ajouter');
+    $('#group').attr('data-addmode', 'true');
+    $('#GroupId').prop('disabled', false);
+    $('#GroupName').val('');
+    $('#GroupId').val('');
+    $('#GroupMember').val('');
+  }
+  function resetUserModal() {
+    $('#LabelUser').html('Ajouter un utilisateur');
+    $('#user').html('Ajouter');
+    $('#user').attr('data-addmode', 'true');
+    $('#UserName').val('');
+    $('#PwdUser').val('');
+    $('#UserId').val('0');
+    $('#HomeDir').val('');
+    $('#Shell').val('/bin/false');
+  }
 
   //Permet de binder les éléments au DOM après mes requêtes ajax
   function initUserBinding() {
-
     $('.delUsr').on('click', function () {
       var id = $(this).attr('data-usr');
-      var answer = confirm("Etes-vous sûr de supprimer cet utilisateur?");
-      if (answer){
+      var answer = confirm('Etes-vous sûr de supprimer cet utilisateur?');
+      if (answer) {
         delUser(id);
       }
     });
 
     $('.editUser').on('click', function () {
+      console.log('Shell: ', $(this).attr('data-shell'));
       id_user = $(this).attr('data-iduser');
-      //console.log('iduser: ' + id_user);
-      $('#EditName').val($(this).attr('data-username'));
-      $('#EditId').val($(this).attr('data-uid'));
-      $('#EditGrp').val($(this).attr('data-gid'));
-      $('#EditHomeDir').val($(this).attr('data-homedir'));
-      $('#EditShell').val($(this).attr('data-shell'));
-      $('#ModalEditUser').modal('show');
+      $('#LabelUser').html('Editer un utilisateur');
+      $('#user').html('Appliquer');
+      $('#user').attr('data-addmode', 'false');
+      $('#UserName').val($(this).attr('data-username'));
+      $('#UserId').val($(this).attr('data-uid'));
+      $('#UserGrp').val($(this).attr('data-gid'));
+      $('#HomeDir').val($(this).attr('data-homedir'));
+      $('#Shell').val($(this).attr('data-shell'));
+      $('#ModalUser').modal('show');
     });
-
   }
   function initGroupBinding() {
-
     $('.delGrp').on('click', function () {
       var id = $(this).attr('data-id');
-      var answer = confirm("Etes-vous sûr de supprimer ce groupe?");
-      if (answer){
+      var answer = confirm('Etes-vous sûr de supprimer ce groupe?');
+      if (answer) {
         delGroup(id);
       }
     });
 
     $('.editGroup').on('click', function () {
       id_group = $(this).attr('data-gid');
-      $('#EditGroupName').val($(this).attr('data-grpname'));
-      $('#EditGroupId').val($(this).attr('data-gid'));
-      $('#EditGroupMember').val($(this).attr('data-members'));
-      $('#ModalEditGroup').modal('show');
+      $('#LabelGroup').html('Editer un groupe');
+      $('#group').html('Appliquer');
+      $('#group').attr('data-addmode', 'false');
+      $('#GroupName').val($(this).attr('data-grpname'));
+      $('#GroupId').val($(this).attr('data-gid'));
+      $('#GroupId').prop('disabled', true);
+      $('#GroupMember').val($(this).attr('data-members'));
+      $('#ModalGroup').modal('show');
     });
-
   }
 
   /**********   Listage   ************/
@@ -164,7 +198,7 @@
         initUserBinding();
       },
       error: function () {
-        console.log('La requête pour récuprer les utilisateurs a expiré!');
+        console.log('La requête pour récupérer les utilisateurs a expiré!');
       }
     });
 
@@ -186,11 +220,10 @@
         for (var key in data) {
           group_list += '<tr><td>' + data[key]['groupname'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['members'] + '</td><td><button type="button" data-grpname="' + data[key]['groupname'] + '" data-gid="' + data[key]['gid'] + '" data-members="' + data[key]['members'] + '" title="Editer" class="btn btn-default btn-xs editGroup"><span class="glyphicon glyphicon-edit"></span></button><button data-id="' + data[key]['gid'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delGrp"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
           $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
-          $('#EditGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
           cpt++;
         }
-        initGroupBinding();
         $('#listGroup').append(group_list);
+        initGroupBinding();
       },
       error: function () {
         console.log('La requête pour récuprer les groupes a expiré!');
@@ -204,13 +237,13 @@
 
   function editGroup(group_id) {
     var cptError = 0;
-    var grpName = $('#EditGroupName').val();
-    var grpId = $('#EditGroupId').val();
-    var grpMember = $('#EditGroupMember').val();
+    var grpName = $('#GroupName').val();
+    var grpId = $('#GroupId').val();
+    var grpMember = $('#GroupMember').val();
 
     if (grpName === '') {
-      $('#EditGroupName').addClass('errorBorder');
-      $('#ErrorEditGroup').show('fast');
+      $('#GroupName').addClass('errorBorder');
+      $('#ErrorGroup').show('fast');
       $('.errorContent').append('Entrez le nom du groupe!');
       cptError++;
     }
@@ -228,23 +261,22 @@
         timeout: 5000,
         dataType: 'json',
         success: function (data) {
-          //console.log('EDIT GRP: ', data);
           var ErrorContent = '';
           if (data.errors) {
             for (var i in data.errors) {
               ErrorContent += '<strong>' + data.errors[i].message + '</strong><br/>'
             }
             $('.errorContent').html(ErrorContent);
-            $('#ErrorEditGroup').show('fast');
+            $('#ErrorGroup').show('fast');
           } else {
             getGroupList();
-            $('#ModalEditGroup').modal('hide');
+            $('#ModalGroup').modal('hide');
+            resetGroupModal();
           }
         },
         error: function () {
-          //console.log('La requête pour editer le groupe a expiré!');
           $('.errorContent').html('La requête a expiré !');
-          $('#ErrorEditGroup').show('fast');
+          $('#ErrorGroup').show('fast');
         }
       });
     }
@@ -252,34 +284,34 @@
 
   function editUser(user_id) {
     var cptError = 0;
-    var usrName = $('#EditName').val();
-    var usrPwd = $('#EditPwd').val();
-    var usrId = $('#EditId').val();
-    var usrGrp = $('#EditGrp').val();
-    var usrHomeDir = $('#EditHomeDir').val();
-    var usrShell = $('#EditShell').val();
+    var usrName = $('#UserName').val();
+    var usrPwd = $('#PwdUser').val();
+    var usrId = $('#UserId').val();
+    var usrGrp = $('#UserGrp').val();
+    var usrHomeDir = $('#HomeDir').val();
+    var usrShell = $('#Shell').val();
 
     if (usrName === '') {
-      $('#EditName').addClass('errorBorder');
-      $('#ErrorEditUser').show('fast');
+      $('#UserName').addClass('errorBorder');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Entrez un nom d\'utilisateur!<br/>');
       cptError++;
     }
     if (usrId === '') {
-      $('#EditId').addClass('errorBorder');
-      $('#ErrorEditUser').show('fast');
+      $('#UserId').addClass('errorBorder');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Indiquez un user id!<br/>');
       cptError++;
     }
     if (usrHomeDir === '') {
-      $('#EditHomeDir').addClass('errorBorder');
-      $('#ErrorEditUser').show('fast');
+      $('#HomeDir').addClass('errorBorder');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Indiquez un répertoire personnel!<br/>');
       cptError++;
     }
     if (usrShell === '') {
-      $('#EditShell').addClass('errorBorder');
-      $('#ErrorEditUser').show('fast');
+      $('#Shell').addClass('errorBorder');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Déterminez le shell utilisateur!<br/>');
       cptError++;
     }
@@ -307,16 +339,17 @@
               ErrorContent += '<strong>' + data.errors[i].message + '</strong><br/>'
             }
             $('.errorContent').html(ErrorContent);
-            $('#ErrorEditUser').show('fast');
+            $('#ErrorUser').show('fast');
           } else {
-            $('#ModalEditUser').modal('hide');
+            $('#ModalUser').modal('hide');
             getUserList();
+            resetUserModal();
           }
         },
         error: function () {
           //console.log('La requête pour modifier l\'utilisateur a expiré!');
           $('.errorContent').html('La requête a expiré !');
-          $('#ErrorEditUser').show('fast');
+          $('#ErrorUser').show('fast');
         }
       });
     }
@@ -332,13 +365,13 @@
 
     if (grpName === '') {
       $('#GroupName').addClass('errorBorder');
-      $('#ErrorAddGroup').show('fast');
+      $('#ErrorGroup').show('fast');
       $('.errorContent').append('Entrez le nom du groupe !<br/>');
       cptError++;
     }
     if (grpId === '') {
       $('#GroupId').addClass('errorBorder');
-      $('#ErrorAddGroup').show('fast');
+      $('#ErrorGroup').show('fast');
       $('.errorContent').append('Entrez un Gid !<br/>');
       cptError++;
     }
@@ -362,26 +395,26 @@
               ErrorContent += '<strong>' + data.errors[i].message + '</strong><br/>';
             }
             $('.errorContent').html(ErrorContent);
-            $('#ErrorAddGroup').show('fast');
+            $('#ErrorGroup').show('fast');
           } else if (data.dup) {
             $('.errorContent').html('<strong>' + data.dup + '</strong><br/>');
-            $('#ErrorAddGroup').show('fast');
+            $('#ErrorGroup').show('fast');
           } else {
             getGroupList();
             $('.succesContent').html('<strong>Le groupe a été ajouté!</strong>');
-            $('#SuccessAddGroup').show();
+            $('#SuccessGroup').show();
             //Reset des champs
             $('#GroupName').val('');
             $('#GroupId').val('');
             $('#GroupMember').val('');
-            $('#ModalAddgroup').modal('hide');
-            $('#SuccessAddGroup').hide();
+            $('#ModalGroup').modal('hide');
+            $('#SuccessGroup').hide();
           }
         },
         error: function () {
           //console.log('La requête pour ajouter le groupe a expiré!');
           $('.errorContent').html('La requête a expiré !');
-          $('#ErrorAddGroup').show('fast');
+          $('#ErrorGroup').show('fast');
         }
       });
     }
@@ -398,31 +431,31 @@
 
     if (usrName === '') {
       $('#UserName').addClass('errorBorder');
-      $('#ErrorAddUser').show('fast');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Entrez un nom d\'utilisateur !<br/>');
       cptError++;
     }
     if (usrPwd === '') {
       $('#PwdUser').addClass('errorBorder');
-      $('#ErrorAddUser').show('fast');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Choisissez un mot de passe !<br/>');
       cptError++;
     }
     if (usrId === '') {
       $('#UserId').addClass('errorBorder');
-      $('#ErrorAddUser').show('fast');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Indiquez un user id !<br/>');
       cptError++;
     }
     if (usrHomeDir === '') {
       $('#HomeDir').addClass('errorBorder');
-      $('#ErrorAddUser').show('fast');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Indiquez un répertoire personnel !<br/>');
       cptError++;
     }
     if (usrShell === '') {
       $('#Shell').addClass('errorBorder');
-      $('#ErrorAddUser').show('fast');
+      $('#ErrorUser').show('fast');
       $('.errorContent').append('<strong>Attention</strong> Déterminez le shell utilisateur !<br/>');
       cptError++;
     }
@@ -449,26 +482,20 @@
               ErrorContent += '<strong>' + data.errors[i].message + '</strong><br/>'
             }
             $('.errorContent').html(ErrorContent);
-            $('#ErrorAddUser').show('fast');
+            $('#ErrorUser').show('fast');
           } else {
             getUserList();
             $('.succesContent').html('<strong>L\'utilisateur a été ajouté</strong>');
             $('#SuccessAddUser').show('fast');
-            //Reset des champs
-            $('#UserName').val('');
-            $('#PwdUser').val('');
-            $('#UserId').val('0');
-            $('#UserGrp').val('5500');
-            $('#HomeDir').val('');
-            $('#Shell').val('');
-            $('#ModalAddUser').modal('hide');
-            $('#SuccessAddUser').hide('fast');
+            resetUserModal();
+            $('#ModalUser').modal('hide');
+            $('#SuccessUser').hide('fast');
           }
         },
         error: function () {
           //console.log('La requête pour ajouter l\'utilisateur a expiré!');
           $('.errorContent').html('La requête a expiré !');
-          $('#ErrorAddUser').show('fast');
+          $('#ErrorUser').show('fast');
         }
       });
     }

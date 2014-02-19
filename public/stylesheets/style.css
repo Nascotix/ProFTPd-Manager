@@ -31,17 +31,12 @@ a {
   margin-left: auto;
 }
 
-#ErrorAddGroup,
-#SuccessAddGroup,
-#ErrorAddUser,
-#SuccessAddUser,
-#ErrorEditUser,
-#SuccessEditUser,
-#ErrorEditGroup,
-#SuccessEditGroup{
+#ErrorGroup,
+#SuccessGroup,
+#ErrorUser,
+#SuccessUser{
   display: none;
 }
-
 .spaceButtonAddUser{
   float: right;
   margin-right: 37px;
@@ -76,7 +71,7 @@ a {
 #userList{
   margin-left: 10px
 }
-.infoGid:hover{
-  color: blue;
+.infoGid{
+  color: red;
   cursor: pointer;
 }

@@ -17,7 +17,7 @@ html
   body
     block header
       a(href='https://github.com/nascotix')
-        img(style='position: absolute; top: 0; right: 0; border: 0;', src='https://github-camo.global.ssl.fastly.net/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67', alt='Fork me on GitHub', data-canonical-src='https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png')
+        img(style='position: absolute; top: 0; right: 0; border: 0; z-index:1;', src='https://github-camo.global.ssl.fastly.net/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67', alt='Fork me on GitHub', data-canonical-src='https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png')
       #wrap
         // Fixed navbar
         .navbar.navbar-default(role='navigation')
@@ -38,157 +38,83 @@ html
 
     block content
 
-    #ModalAddgroup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-      .modal-dialog
-          .modal-content
-             .modal-header
-                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-                h4#LabelAddGroup.modal-title.centerContent Ajouter un groupe
-             .modal-body
-               .modalEdit
-                  div.disposition
-                    label.dispLabel Nom du groupe:
-                    input.form-control#GroupName(type='text' placeholder='Nom du groupe')
-                  br
-                  div.disposition
-                    label.dispLabel Gid
-                      span.infoGid(title='Doit être un nombre et UNIQUE !')  [?] :
-                    input.form-control#GroupId(type='text' placeholder='Gid')
-                  br
-                  div.disposition
-                    label.dispLabel Membres du groupe:
-                    input.form-control#GroupMember(type='text' placeholder='Membre du groupe')
-                  br
-                  .alert.alert-warning.alerteGroup#ErrorAddGroup
-                    .errorContent
-                  .alert.alert-success.alerteGroup#SuccessAddGroup
-                    .succesContent
-             .modal-footer
-                button.btn.btn-default(type='button', data-dismiss='modal') Retour
-                button.btn.btn-primary#group(type='button') Appliquer
-
-    #ModalEditGroup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-      .modal-dialog
-          .modal-content
-             .modal-header
-                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-                h4#LabelEditGroup.modal-title.centerContent Editer un groupe
-             .modal-body
-                .modalEdit
-                  div.disposition
-                    label.dispLabel Nom du groupe:
-                    input.form-control#EditGroupName(type='text' placeholder='Nom du groupe')
-                  br
-                  div.disposition
-                    label.dispLabel Gid :
-                    input.form-control#EditGroupId(type='text' placeholder='Gid' disabled)
-                  br
-                  div.disposition
-                    label.dispLabel Membres du groupe:
-                    input.form-control#EditGroupMember(type='text' placeholder='Membre du groupe')
-                  br
-                  .alert.alert-warning.alerteGroup#ErrorEditGroup
-                    .errorContent
-                  .alert.alert-success.alerteGroup#SuccessEditGroup
-                    .succesContent
-             .modal-footer
-                button.btn.btn-default(type='button', data-dismiss='modal') Retour
-                button.btn.btn-primary#SubmitEditGroup(type='button') Appliquer
-
-    #ModalAddUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalLabel', aria-hidden='true')
+    #ModalGroup.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
       .modal-dialog
         .modal-content
           .modal-header
-              button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-              h4#LabelAddUser.modal-title.centerContent Ajouter un utilisateur
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#LabelGroup.modal-title.centerContent Ajouter un groupe
           .modal-body
-            .modalEdit
-              div.disposition
-                label.dispLabel Nom :
-                input.form-control#UserName(type='text' placeholder='Nom de l\'utilisateur')
-              br
-              div.disposition
-                label.dispLabel Mot de passe :
-                input.form-control#PwdUser(type='password' placeholder='Mot de passe')
-              br
-              div.disposition
-                label.dispLabel Uid :
-                input.form-control#UserId(type='text' placeholder='Uid' value='0')
-              br
-              div.disposition
-                label.dispLabel Gid :
-                select.form-control#UserGrp
-              br
-              div.disposition
-                label.dispLabel Répertoire personnel :
-                input.form-control#HomeDir(type='text' placeholder='Répertoire personnel')
-              br
-              div.disposition
-                label.dispLabel Shell :
-                //input.form-control#Shell(type='text' placeholder='Shell de l\'utilisateur')
-                select.form-control#Shell
-                  option(value='/bin/false') /bin/false
-                  option(value='/bin/ash') /bin/ash
-                  option(value='/bin/bash') /bin/bash
-                  option(value='/bin/passwd') /bin/passwd
-                  option(value='/bin/sh') /bin/sh
-                  option(value='/bin/tcsh') /bin/tcsh
-                  option(value='usr/bin/ksh') /usr/bin/ksh
-                  option(value='/usr/bin/zsh') /usr/bin/zsh
-              br
-              .alert.alert-warning.alerteUser#ErrorAddUser
-                .errorContent
-              .alert.alert-success.alerteUser#SuccessAddUser
-                .succesContent
-          .modal-footer
-            button.btn.btn-default(type='button', data-dismiss='modal') Retour
-            button.btn.btn-primary#user(type='button') Ajouter
-
-    #ModalEditUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='ModalLabel', aria-hidden='true')
-      .modal-dialog
-          .modal-content
-             .modal-header
-                button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
-                h4#LabelEditUser.modal-title.centerContent Editer un utilisateur
-             .modal-body
-                .modalEdit
-                  div.dispositionEdition
-                    label.dispLabel Nom :
-                    input.form-control#EditName(type='text' placeholder='Nom de l\'utilisateur')
-                  br
-                  div.dispositionEdition
-                    label.dispLabel Mot de passe :
-                    input.form-control#EditPwd(type='password' placeholder='Mot de passe')
-                  br
-                  div.dispositionEdition
-                    label.dispLabel Uid :
-                    input.form-control#EditId(type='text' placeholder='Uid' value='0')
-                  br
-                  div.dispositionEdition
-                    label.dispLabel Gid :
-                    select.form-control#EditGrp
-                  br
-                  div.dispositionEdition
-                    label.dispLabel Répertoire personnel :
-                    input.form-control#EditHomeDir(type='text' placeholder='Répertoire personnel')
-                  br
-                  div.dispositionEdition
-                    label.dispLabel Shell :
-                    //input.form-control#EditShell(type='text' placeholder='Shell de l\'utilisateur')
-                    select.form-control#EditShell
-                      option(value='/bin/false') /bin/false
-                      option(value='/bin/ash') /bin/ash
-                      option(value='/bin/bash') /bin/bash
-                      option(value='/bin/passwd') /bin/passwd
-                      option(value='/bin/sh') /bin/sh
-                      option(value='/bin/tcsh') /bin/tcsh
-                      option(value='usr/bin/ksh') /usr/bin/ksh
-                      option(value='/usr/bin/zsh') /usr/bin/zsh
-                  br
-                  .alert.alert-warning.alerteUser#ErrorEditUser
+            .form-horizontal
+              .form-group
+                label.col-md-4.control-label Nom du groupe
+                .col-md-6
+                  input#GroupName.form-control(type='text', placeholder='Nom du groupe')
+              .form-group
+                label.col-md-4.control-label Gid
+                  span.infoGid(title='Doit être un nombre et UNIQUE !')  [?]
+                .col-md-6
+                  input#GroupId.form-control(type='text', placeholder='Gid')
+              .form-group
+                label.col-md-4.control-label Membres du groupe
+                .col-md-6
+                  input#GroupMember.form-control(type='text', placeholder='Membres du groupe')
+              .alert.alert-warning.alerteGroup#ErrorGroup
                     .errorContent
-                  .alert.alert-success.alerteUser#SuccessEditUser
+                  .alert.alert-success.alerteGroup#SuccessGroup
                     .succesContent
-             .modal-footer
+          .modal-footer
+            .form-group
+              .col-sm-offset-2.col-sm-10
                 button.btn.btn-default(type='button', data-dismiss='modal') Retour
-                button.btn.btn-primary#SubmitEditUser(type='button') Appliquer
+                button.btn.btn-primary#group(type='button' data-addmode='true') Ajouter
+
+    #ModalUser.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4#LabelUser.modal-title.centerContent Ajouter un utilisateur
+          .modal-body
+            .form-horizontal
+              .form-group
+                label.col-md-4.control-label Nom de l'utilisateur
+                .col-md-6
+                  input#UserName.form-control(type='text', placeholder='Nom de l\'utilisateur')
+              .form-group
+                label.col-md-4.control-label Mot de passe
+                .col-md-6
+                  input#PwdUser.form-control(type='password', placeholder='Mot de passe')
+              .form-group
+                label.col-md-4.control-label Uid
+                .col-md-6
+                  input#UserId.form-control(type='text', placeholder='Uid' value='0')
+              .form-group
+                label.col-md-4.control-label Gid
+                .col-md-6
+                  select.form-control#UserGrp
+              .form-group
+                label.col-md-4.control-label Répertoire personnel
+                .col-md-6
+                  input#HomeDir.form-control(type='text', placeholder='Répertoire personnel')
+              .form-group
+                label.col-md-4.control-label Shell
+                .col-md-6
+                  select.form-control#Shell
+                    option(value='/bin/false') /bin/false
+                    option(value='/bin/ash') /bin/ash
+                    option(value='/bin/bash') /bin/bash
+                    option(value='/bin/passwd') /bin/passwd
+                    option(value='/bin/sh') /bin/sh
+                    option(value='/bin/tcsh') /bin/tcsh
+                    option(value='usr/bin/ksh') /usr/bin/ksh
+                    option(value='/usr/bin/zsh') /usr/bin/zsh
+              .alert.alert-warning.alerteGroup#ErrorUser
+                    .errorContent
+                  .alert.alert-success.alerteGroup#SuccessUser
+                    .succesContent
+          .modal-footer
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type='button', data-dismiss='modal') Retour
+                button.btn.btn-primary#user(type='button' data-addmode='true') Ajouter
