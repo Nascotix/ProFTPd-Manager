@@ -39,8 +39,36 @@
       id = $(id);
       id.focus(function (e) {
         $(e.currentTarget).removeClass('errorBorder');
-        $('#ErrorAddUser').hide('fast');
+        $('#ErrorUser').hide('fast');
         $('.errorContent').html('');
+      });
+    });
+
+    // Enter key press in formula
+    [
+      '#GroupName',
+      '#GroupId',
+      '#GroupMember'
+    ].forEach(function (id) {
+      id = $(id);
+      id.keydown(function(event) {
+        if(event.keyCode==13){
+           $('#group').trigger('click');
+        }
+      });
+    });
+
+    [
+      '#UserName',
+      '#PwdUser',
+      '#UserId',
+      '#HomeDir'
+    ].forEach(function (id) {
+      id = $(id);
+      id.keydown(function(event) {
+        if(event.keyCode==13){
+           $('#user').trigger('click');
+        }
       });
     });
 
@@ -106,6 +134,7 @@
         editUser(id_user);
       }
     });
+
   });
 
   /************   Fonctions   ***********/
@@ -131,7 +160,17 @@
   }
 
   //Permet de binder les éléments au DOM après mes requêtes ajax
-  function initUserBinding() {
+  function initUserBinding(liste) {
+    console.log('value: ' , liste);
+    // liste.forEach(function (i) {
+    //   console.log('value: ' , i);
+    //   $('.accessBox').prop('checked', i);
+    // });
+    for(var key in liste) {
+      //console.log('value: ' , liste);
+      $('.accessBox').prop('checked', liste[key]);
+    }
+
     $('.delUsr').on('click', function () {
       var id = $(this).attr('data-usr');
       var answer = confirm('Etes-vous sûr de supprimer cet utilisateur?');
@@ -141,7 +180,6 @@
     });
 
     $('.editUser').on('click', function () {
-      console.log('Shell: ', $(this).attr('data-shell'));
       id_user = $(this).attr('data-iduser');
       $('#LabelUser').html('Editer un utilisateur');
       $('#user').html('Appliquer');
@@ -152,6 +190,18 @@
       $('#HomeDir').val($(this).attr('data-homedir'));
       $('#Shell').val($(this).attr('data-shell'));
       $('#ModalUser').modal('show');
+    });
+
+    // Gestion de l'accessibilité
+    $('.accessBox').change(function () {
+      var acc = $(this).attr('data-access');
+      if($(this).is(":checked")) {
+        //console.log('ACCESS: ', acc);
+        getAccess(acc, true);
+      } else {
+        //console.log('PAS ACCESS: ', acc);
+        getAccess(acc, false);
+      }
     });
   }
   function initGroupBinding() {
@@ -181,21 +231,27 @@
   function getUserList() {
     $('#listUser').html('');
     var num = 1;
+    var i = 0;
 
     var xhr = $.ajax({
       url: '/users',
       timeout: 5000,
       dataType: 'json',
       success: function (data) {
-        //console.log('Users Pwd: ', data[4]['passwd']);
+        var access_list = new Array();
         for (var key in data) {
-          if (data[key]['passwd'] === undefined)
-            $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
-          else
-            $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Non</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+          //console.log('res: ', data[key]['LoginAllowed']);
+          if (data[key]['passwd'] === undefined){
+            $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox"></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+            access_list[i] += data[key]['LoginAllowed'];
+            console.log('res: ', data[key]['LoginAllowed']);
+          } else {
+            $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Non</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox" checked=' + data[key]['LoginAllowed'] + '></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+          }
           num++;
+          i++;
         }
-        initUserBinding();
+        initUserBinding(access_list);
       },
       error: function () {
         console.log('La requête pour récupérer les utilisateurs a expiré!');
@@ -214,7 +270,6 @@
       timeout: 5000,
       dataType: 'json',
       success: function (data) {
-        //console.log(data);
         var cpt = 1;
         var group_list = '';
         for (var key in data) {
@@ -545,4 +600,27 @@
       }
     });
   }
+
+  /**********   Accès   ************/
+
+  function getAccess(usr, bool){
+    var datastr = {};
+    datastr.check = bool;
+
+    $.ajax({
+      type: 'PUT',
+      url: '/users/' + usr,
+      timeout: 5000,
+      data: datastr,
+      dataType: 'json',
+      success: function (data) {
+        console.log(data);
+        getUserList();
+      },
+      error: function () {
+        console.log('La requête pour supprimer l\'utilisateur a expiré!');
+      }
+    });
+  }
+
 })(window);

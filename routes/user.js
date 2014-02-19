@@ -133,65 +133,81 @@ module.exports = function (model) {
   };
 
   controller.edituser = function (req, res, next) {
-    var editDate = new Date();
-    var obj = {};
-    obj.usrname = validator.trim(req.body.name);
-    obj.usruid = validator.trim(req.body.uid);
-    obj.usrhomedir = validator.trim(req.body.homedir);
-    obj.usrshell = validator.trim(req.body.shell);
+    console.log('BOOL', req.body.check);
+    if (!req.body.check) {
+      console.log('ICI');
+      var editDate = new Date();
+      var obj = {};
+      obj.usrname = validator.trim(req.body.name);
+      obj.usruid = validator.trim(req.body.uid);
+      obj.usrhomedir = validator.trim(req.body.homedir);
+      obj.usrshell = validator.trim(req.body.shell);
 
-    var schema = controller.validate_user();
-    var validation = revalidator.validate(obj, schema);
+      var schema = controller.validate_user();
+      var validation = revalidator.validate(obj, schema);
 
-    if (req.body.pwd) {
-      var usrpwd = crypto.createHash('md5').update(req.body.pwd).digest('hex');
+      if (req.body.pwd) {
+        var usrpwd = crypto.createHash('md5').update(req.body.pwd).digest('hex');
 
-      if (!validation.valid) {
-        res.send(validation);
-        return;
+        if (!validation.valid) {
+          res.send(validation);
+          return;
+        } else {
+          model.editUser(req.params.id, {
+            userid: req.body.name,
+            passwd: usrpwd,
+            uid: req.body.uid,
+            gid: req.body.grp,
+            homedir: req.body.homedir,
+            shell: req.body.shell,
+            count: 0,
+            accessed: '',
+            modified: editDate,
+            LoginAllowed: true
+          }, function (err, user) {
+            if (err) {
+              next(err);
+              return;
+            }
+            res.send(user);
+          });
+        }
       } else {
-        model.editUser(req.params.id, {
-          userid: req.body.name,
-          passwd: usrpwd,
-          uid: req.body.uid,
-          gid: req.body.grp,
-          homedir: req.body.homedir,
-          shell: req.body.shell,
-          count: 0,
-          accessed: '',
-          modified: editDate,
-          LoginAllowed: true
-        }, function (err, user) {
-          if (err) {
-            next(err);
-            return;
-          }
-          res.send(user);
-        });
+        if (!validation.valid) {
+          res.send(validation);
+          return;
+        } else {
+          model.editUser(req.params.id, {
+            userid: req.body.name,
+            uid: req.body.uid,
+            gid: req.body.grp,
+            homedir: req.body.homedir,
+            shell: req.body.shell,
+            count: 0,
+            accessed: '',
+            modified: editDate,
+            LoginAllowed: true
+          }, function (err, user) {
+            if (err) {
+              next(err);
+              return;
+            }
+            res.send(user);
+          });
+        }
       }
     } else {
-      if (!validation.valid) {
-        res.send(validation);
-        return;
-      } else {
-        model.editUser(req.params.id, {
-          userid: req.body.name,
-          uid: req.body.uid,
-          gid: req.body.grp,
-          homedir: req.body.homedir,
-          shell: req.body.shell,
-          count: 0,
-          accessed: '',
-          modified: editDate,
-          LoginAllowed: true
-        }, function (err, user) {
-          if (err) {
-            next(err);
-            return;
-          }
-          res.send(user);
-        });
-      }
+      console.log('LA');
+      model.editUser(req.params.id, {
+        LoginAllowed: req.body.check
+      }, function (err, user) {
+        if (err) {
+          next(err);
+          return;
+        }
+        console.log('OK');
+        res.send(user);
+      });
     }
   };
 

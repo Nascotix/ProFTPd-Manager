@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .globalContainer
+  .globalUserContainer
     br
     .mainTilte
       h2 Liste des utilisateurs
@@ -12,7 +12,7 @@ block content
     br
     .MainContainer
       table.table.table-hover
-        thead
+        thead.inlineTilte
           tr
             th N°
             th Utilisateur
@@ -21,6 +21,7 @@ block content
             th Gid
             th Répertoire personnel
             th Shell
+            th Accès
             th Gestion
         tbody#listUser
 
