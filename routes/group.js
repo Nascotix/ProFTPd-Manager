@@ -29,6 +29,13 @@ module.exports = function (model) {
             maxLength: 'Limitez le nom du groupe à 16 caractères !'
           }
         },
+        grpid: {
+          description: 'validation du champ gid',
+          pattern: /^[0-9]+$/,
+          messages: {
+            pattern: 'Le Gid doit être un nombre !'
+          }
+        },
         grpmember: {
           description: 'validation du champ membres du groupe',
           type: 'string',
@@ -71,6 +78,7 @@ module.exports = function (model) {
     var obj = {};
     obj.grpname = validator.trim(req.body.nameGrp);
     obj.grpmember = validator.trim(req.body.membGrp);
+    obj.grpid = validator.trim(req.body.idGroup);
 
     var schema = controller.validate_group();
     var validation = revalidator.validate(obj, schema);

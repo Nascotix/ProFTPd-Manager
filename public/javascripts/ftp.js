@@ -357,11 +357,16 @@
 
   /**********   Ajout   ************/
 
+  function isNumber(input) {
+    return !isNaN(input);
+  }
+
   function addGroup() {
     var cptError = 0;
     var grpName = $('#GroupName').val();
     var grpId = $('#GroupId').val();
     var grpMember = $('#GroupMember').val();
+    var checkInt = isNumber(grpId);
 
     if (grpName === '') {
       $('#GroupName').addClass('errorBorder');
@@ -373,6 +378,12 @@
       $('#GroupId').addClass('errorBorder');
       $('#ErrorGroup').show('fast');
       $('.errorContent').append('Entrez un Gid !<br/>');
+      cptError++;
+    }
+    if (checkInt != true){
+      $('#GroupId').addClass('errorBorder');
+      $('#ErrorGroup').show('fast');
+      $('.errorContent').append('Le Gid doit être un nombre !<br/>');
       cptError++;
     }
 
