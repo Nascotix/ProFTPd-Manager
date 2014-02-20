@@ -160,16 +160,7 @@
   }
 
   //Permet de binder les éléments au DOM après mes requêtes ajax
-  function initUserBinding(liste) {
-    console.log('value: ' , liste);
-    // liste.forEach(function (i) {
-    //   console.log('value: ' , i);
-    //   $('.accessBox').prop('checked', i);
-    // });
-    for(var key in liste) {
-      //console.log('value: ' , liste);
-      $('.accessBox').prop('checked', liste[key]);
-    }
+  function initUserBinding() {
 
     $('.delUsr').on('click', function () {
       var id = $(this).attr('data-usr');
@@ -240,18 +231,19 @@
       success: function (data) {
         var access_list = new Array();
         for (var key in data) {
-          //console.log('res: ', data[key]['LoginAllowed']);
           if (data[key]['passwd'] === undefined){
-            $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox"></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
-            access_list[i] += data[key]['LoginAllowed'];
-            console.log('res: ', data[key]['LoginAllowed']);
+            if (data[key]['LoginAllowed'] === 'true') {
+              $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox" checked=true></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+            } else {
+              $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox"></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
+            }
           } else {
             $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Non</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['homedir'] + '</td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox" checked=' + data[key]['LoginAllowed'] + '></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
           }
           num++;
           i++;
         }
-        initUserBinding(access_list);
+        initUserBinding();
       },
       error: function () {
         console.log('La requête pour récupérer les utilisateurs a expiré!');
@@ -274,7 +266,7 @@
         var group_list = '';
         for (var key in data) {
           group_list += '<tr><td>' + data[key]['groupname'] + '</td><td>' + data[key]['gid'] + '</td><td>' + data[key]['members'] + '</td><td><button type="button" data-grpname="' + data[key]['groupname'] + '" data-gid="' + data[key]['gid'] + '" data-members="' + data[key]['members'] + '" title="Editer" class="btn btn-default btn-xs editGroup"><span class="glyphicon glyphicon-edit"></span></button><button data-id="' + data[key]['gid'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delGrp"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
-          $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['groupname']).attr('value', data[key]['gid']));
+          $('#UserGrp').append($('<option data-numb=' + cpt + '>').text(data[key]['gid'] + ' - ' + data[key]['groupname']).attr('value', data[key]['gid']));
           cpt++;
         }
         $('#listGroup').append(group_list);
