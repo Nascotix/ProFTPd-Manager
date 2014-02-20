@@ -135,7 +135,6 @@ module.exports = function (model) {
   controller.edituser = function (req, res, next) {
     console.log('BOOL', req.body.check);
     if (!req.body.check) {
-      console.log('ICI');
       var editDate = new Date();
       var obj = {};
       obj.usrname = validator.trim(req.body.name);
@@ -197,7 +196,6 @@ module.exports = function (model) {
         }
       }
     } else {
-      console.log('LA');
       model.editUser(req.params.id, {
         LoginAllowed: req.body.check
       }, function (err, user) {
@@ -205,7 +203,6 @@ module.exports = function (model) {
           next(err);
           return;
         }
-        console.log('OK');
         res.send(user);
       });
     }

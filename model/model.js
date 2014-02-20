@@ -129,8 +129,6 @@ module.exports = function (config) {
   /**********   Modification   ************/
 
   models.editUser = function (id, params, callback) {
-    console.log('id: ' + id);
-    console.log('params: ' + params);
     models.getUser(id, function (err, model) {
       if (err) {
         return callback(err);
