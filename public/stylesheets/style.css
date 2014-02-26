@@ -45,7 +45,7 @@ a {
 }
 .spaceButtonAddUser{
   float: right;
-  margin-right: 60px;
+  margin-right: 53px;
 }
 .spaceButtonAddGroup{
   float: right;
@@ -79,5 +79,11 @@ a {
 }
 .infoGid{
   color: red;
+  cursor: pointer;
+}
+.hdir{
+  text-overflow: ellipsis;
+  width: 250px;
+  overflow: hidden;
   cursor: pointer;
 }
