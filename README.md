@@ -1,5 +1,5 @@
 
-# ProFTPd Manager [![Build Status](https://travis-ci.org/Nascotix/ProFTPd-Manager.png?branch=master)](https://travis-ci.org/Nascotix/ProFTPd-Manager)
+# ProFTPd Manager [![Build Status](https://travis-ci.org/Nascotix/ProFTPd-Manager.png?branch=master)](https://travis-ci.org/Nascotix/ProFTPd-Manager)  [![Coverage Status](https://coveralls.io/repos/Nascotix/ProFTPd-Manager/badge.png)](https://coveralls.io/r/Nascotix/ProFTPd-Manager)
 
 ProFTPd Manager est un outil de gestion des utilisateurs et des groupes de votre serveur ProFTPd via une toute nouvelle interface web au design épuré. ProFTPd manager se veut simple d'utilisation.
 Vous avez la possibilité de spécifier la configuration de votre base de donnée soit en ligne de commande soit via un fichier de configuration JSON.
