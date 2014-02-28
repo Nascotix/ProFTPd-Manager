@@ -6,6 +6,7 @@ module.exports = function (grunt) {
     jshint: {
       options: {
         'browser': true,
+        'devel': true,
         'node': true,
         'esnext': false,
         'bitwise': true,
@@ -72,6 +73,15 @@ module.exports = function (grunt) {
         src: ['test/*.js']
       }
     },
+    blanket: {
+      options: {
+        // Task-specific options go here.
+        debug: true
+      },
+      files: {
+        'coverage/': ['model/'],
+      },
+    },
     concurrent: {
       server: {
         tasks: ['nodemon', 'watch'],
@@ -83,7 +93,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', 'server');
-  grunt.registerTask('test', ['jshint', 'mochaTest']);
+  grunt.registerTask('test', ['blanket', 'jshint', 'mochaTest']);
   grunt.registerTask('server', 'concurrent:server');
 
   require('load-grunt-tasks')(grunt);

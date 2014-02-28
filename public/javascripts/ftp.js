@@ -51,9 +51,9 @@
       '#GroupMember'
     ].forEach(function (id) {
       id = $(id);
-      id.keydown(function(event) {
-        if(event.keyCode==13){
-           $('#group').trigger('click');
+      id.keydown(function (event) {
+        if (event.keyCode === 13) {
+          $('#group').trigger('click');
         }
       });
     });
@@ -65,9 +65,9 @@
       '#HomeDir'
     ].forEach(function (id) {
       id = $(id);
-      id.keydown(function(event) {
-        if(event.keyCode==13){
-           $('#user').trigger('click');
+      id.keydown(function (event) {
+        if (event.keyCode === 13) {
+          $('#user').trigger('click');
         }
       });
     });
@@ -90,11 +90,11 @@
     });
 
     //Switch modal
-    $('#ModalGroup').on('hidden.bs.modal', function (e) {
+    $('#ModalGroup').on('hidden.bs.modal', function () {
       //groupSwitch();
       resetGroupModal();
     });
-    $('#ModalUser').on('hidden.bs.modal', function (e) {
+    $('#ModalUser').on('hidden.bs.modal', function () {
       //userSwitch();
       resetUserModal();
     });
@@ -186,7 +186,7 @@
     // Gestion de l'accessibilité
     $('.accessBox').change(function () {
       var acc = $(this).attr('data-access');
-      if($(this).is(":checked")) {
+      if ($(this).is(':checked')) {
         //console.log('ACCESS: ', acc);
         getAccess(acc, true);
       } else {
@@ -229,9 +229,8 @@
       timeout: 5000,
       dataType: 'json',
       success: function (data) {
-        var access_list = new Array();
         for (var key in data) {
-          if (data[key]['passwd'] === undefined){
+          if (data[key]['passwd'] === undefined) {
             if (data[key]['LoginAllowed'] === 'true') {
               $('#listUser').append('<tr><td>' + num + '</td><td>' + data[key]['userid'] + '</td><td>Oui</td><td>' + data[key]['uid'] + '</td><td>' + data[key]['gid'] + '</td><td><div class="hdir" title="' + data[key]['homedir'] + '">' + data[key]['homedir'] + '</div></td><td>' + data[key]['shell'] + '</td><td><input class="accessBox" data-access="' + data[key]['id'] + '" type="checkbox" checked=true></td><td><button data-iduser="' + data[key]['id'] + '" data-username="' + data[key]['userid'] + '" data-uid="' + data[key]['uid'] + '" data-gid="' + data[key]['gid'] + '" data-homedir="' + data[key]['homedir'] + '" data-shell="' + data[key]['shell'] + '" type="button" title="Editer" class="btn btn-default btn-xs editUser"><span class="glyphicon glyphicon-edit"></span></button><button data-usr="' + data[key]['id'] + '" type="button" title="Supprimer" class="btn btn-danger btn-xs delUsr"><span class="glyphicon glyphicon-trash"></span></button></td></tr>');
             } else {
@@ -427,7 +426,7 @@
       $('.errorContent').append('Entrez un Gid !<br/>');
       cptError++;
     }
-    if (checkInt != true){
+    if (checkInt !== true) {
       $('#GroupId').addClass('errorBorder');
       $('#ErrorGroup').show('fast');
       $('.errorContent').append('Le Gid doit être un nombre !<br/>');
@@ -534,6 +533,7 @@
         timeout: 5000,
         dataType: 'json',
         success: function (data) {
+          console.log('DATA: ', data);
           var ErrorContent = '';
           if (data.errors) {
             for (var i in data.errors) {
@@ -595,7 +595,7 @@
 
   /**********   Accès   ************/
 
-  function getAccess(usr, bool){
+  function getAccess(usr, bool) {
     var datastr = {};
     datastr.check = bool;
 
