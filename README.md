@@ -1,7 +1,7 @@
 
 # ProFTPd Manager
 
-[![Build Status](https://travis-ci.org/Nascotix/ProFTPd-Manager.png?branch=master)](https://travis-ci.org/Nascotix/ProFTPd-Manager) [![Coverage Status](https://coveralls.io/repos/Nascotix/ProFTPd-Manager/badge.png)](https://coveralls.io/r/Nascotix/ProFTPd-Manager)  [![NPM version](https://badge.fury.io/js/proftpd-manager.png)](http://badge.fury.io/js/proftpd-manager)
+[![Build Status](https://travis-ci.org/Nascotix/ProFTPd-Manager.png?branch=master)](https://travis-ci.org/Nascotix/ProFTPd-Manager) [![Coverage Status](https://coveralls.io/repos/Nascotix/ProFTPd-Manager/badge.png)](https://coveralls.io/r/Nascotix/ProFTPd-Manager)  [ ![Codeship Status for Nascotix/ProFTPd-Manager](https://www.codeship.io/projects/8d16f630-84e6-0131-d16b-06d26a403a99/status?branch=master)](https://www.codeship.io/projects/15079)
 
 [![NPM](https://nodei.co/npm/proftpd-manager.png)](https://nodei.co/npm/proftpd-manager/)
 
