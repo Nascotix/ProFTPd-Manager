@@ -264,4 +264,16 @@ describe('PUT /users', function () {
       .expect('{\n  "valid": false,\n  "errors": [\n    {\n      "attribute": "pattern",\n      "property": "usrname",\n      "expected": {},\n      "actual": "@rg$",\n      "message": "Certains caractères ne sont pas autorisés dans le nom de l\'utilisateur !"\n    },\n    {\n      "attribute": "pattern",\n      "property": "usrhomedir",\n      "expected": {},\n      "actual": "/test/@rg$",\n      "message": "Certains caractères ne sont pas autorisés pour le home directory !"\n    }\n  ]\n}', done);
   });
 
+  it('Should edit a user without password change', function (done) {
+    request(app)
+      .put('/users/' + 109)
+      .send({
+        'name': 'cover',
+        'uid': '0',
+        'grp': '5503',
+        'homedir': '/test/cover',
+        'shell': '/usr/bin/zsh'
+      })
+      .expect('{\n  "id": 109,\n  "userid": "cover",\n  "uid": "0",\n  "gid": "5503",\n  "homedir": "/test/cover",\n  "shell": "/usr/bin/zsh",\n  "count": 0,\n  "accessed": "",\n  "modified": "2014-03-03T11:11:23.045Z",\n  "LoginAllowed": true\n}', done);
+  });
 });
