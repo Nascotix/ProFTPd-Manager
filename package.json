@@ -28,7 +28,11 @@
   "private": false,
   "bin": "bin/proftpd-manager",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "make test"
+  },
+  "bin": {
+    "coveralls": "./bin/coveralls.js"
   },
   "dependencies": {
     "express": "3.4.0",

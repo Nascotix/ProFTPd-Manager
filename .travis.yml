@@ -6,3 +6,5 @@ node_js:
 branches:
   only:
     - master
+# Coverage
+script: make test-coveralls
