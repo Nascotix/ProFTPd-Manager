@@ -57,7 +57,7 @@
     "blanket": "~1.1.6",
     "grunt-blanket": "0.0.8",
     "coveralls": "~2.8.0",
-    "istanbul": "~0.2.4",
+    "istanbul": "~0.2.4"
   },
   "config": {
     "blanket": {
