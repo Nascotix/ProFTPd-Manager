@@ -119,7 +119,6 @@ module.exports = function (model) {
   };
 
   controller.editgroup = function (req, res, next) {
-
     var obj = {};
     obj.grpname = validator.trim(req.body.nameGrp);
     obj.grpmember = validator.trim(req.body.membGrp);

@@ -25,8 +25,6 @@ var createApp = function (config) {
 
   config = extend(true, {}, def, config);
 
-  //console.log('Starting with options: ', config);
-
   var path = require('path');
   var model = require('./model/model')(config.model);
   var user = require('./routes/user')(model);

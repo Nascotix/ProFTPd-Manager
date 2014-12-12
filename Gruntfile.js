@@ -33,6 +33,7 @@ module.exports = function (grunt) {
           'it': false,
           'describe': false,
           'after': false,
+          'before': false,
           '$': false,
           'jQuery': false
         }
