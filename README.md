@@ -37,6 +37,8 @@ model: {
 }
 ```
 
+Le schéma est disponible dans `[config/sql-schema.sql](config/sql-schema.sql)`.
+
 ### Fichier de configuration JSON
 
 Créez un fichier de configuration JSON où vous le voulez. Ce fichier ne doit contenir aucun commentaire, uniquement du JSON. Portez une attention toute particulière à la syntaxe à utiliser!
