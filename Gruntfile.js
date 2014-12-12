@@ -32,6 +32,8 @@ module.exports = function (grunt) {
         'globals': {
           'it': false,
           'describe': false,
+          'after': false,
+          'before': false,
           '$': false,
           'jQuery': false
         }

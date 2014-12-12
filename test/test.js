@@ -4,28 +4,28 @@
 
 'use strict';
 
-// var chai = require('chai');
-// var assert = chai.assert;
-// var expect = chai.expect;
 var request = require('supertest');
+var expect = require('chai').expect;
+
+var mysqlConfig = {
+  host     : '127.0.0.1',
+  user     : 'root',
+  password : '',
+  database : 'proftpd',
+  charset  : 'utf8'
+};
 
 var app = require('../app')({
   model: {
     client: 'mysql',
-    connection: {
-      host     : '127.0.0.1',
-      user     : 'root',
-      password : '',
-      database : 'proftpd',
-      charset  : 'utf8'
-    },
+    connection: mysqlConfig,
     debug: true
   }
 });
 
-// beforeEach(function (done) {
-
-// });
+before(function (done) {
+  require('./fixtures/import-test-records')(mysqlConfig, done);
+});
 
 describe('GET /users', function () {
   it('Should return all users in json', function (done) {
@@ -135,7 +135,6 @@ describe('POST /users', function () {
 describe('DELETE /groups', function () {
 
   after(function (done) {
-    console.log('AFTER ERASE A GROUP');
     request(app)
       .post('/groups')
       .send({
@@ -233,7 +232,7 @@ describe('PUT /users', function () {
         'homedir': '/test/test',
         'shell': '/usr/bin/zsh'
       })
-      .expect('false',done);
+      .expect('false', done);
   });
 
   it('Should not edit a user because of wrong args', function (done) {
@@ -274,6 +273,28 @@ describe('PUT /users', function () {
         'homedir': '/test/cover',
         'shell': '/usr/bin/zsh'
       })
-      .expect('{\n  "id": 109,\n  "userid": "cover",\n  "uid": "0",\n  "gid": "5503",\n  "homedir": "/test/cover",\n  "shell": "/usr/bin/zsh",\n  "count": 0,\n  "accessed": "",\n  "modified": "2014-03-03T11:11:23.045Z",\n  "LoginAllowed": true\n}', done);
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
+
+        // Difficult to known extact modified date, so set it to null for test
+        res.body.modified = null;
+
+        expect(res.body).deep.equals({ id: 109,
+          userid: 'cover',
+          uid: '0',
+          gid: '5503',
+          homedir: '/test/cover',
+          shell: '/usr/bin/zsh',
+          count: 0,
+          accessed: '',
+          LoginAllowed: true,
+          modified: null
+        });
+
+        done();
+      });
   });
 });

@@ -133,7 +133,6 @@ module.exports = function (model) {
   };
 
   controller.edituser = function (req, res, next) {
-    console.log('BOOL', req.body.check);
     if (!req.body.check) {
       var editDate = new Date();
       var obj = {};
