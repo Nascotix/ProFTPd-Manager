@@ -233,7 +233,7 @@ describe('PUT /users', function () {
         'homedir': '/test/test',
         'shell': '/usr/bin/zsh'
       })
-      .expect('false',done);
+      .expect('false', done);
   });
 
   it('Should not edit a user because of wrong args', function (done) {
