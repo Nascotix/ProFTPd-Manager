@@ -3,3 +3,4 @@ npm-debug.log
 node_modules
 basic.js
 coverage
+coverage.json
